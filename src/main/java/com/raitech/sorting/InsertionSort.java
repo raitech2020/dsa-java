@@ -41,19 +41,6 @@ class InsertionSort {
         }
     }
 
-//    void sort2() {
-//        int i, j, tmp; // i = out, j = in
-//        for (i = 1; i < nElems; i++) {
-//            tmp = a[i]; // save it
-//            j = i;
-//            while (j > 0 && a[j - 1] >= tmp) {
-//                a[j] = a[j - 1];
-//                --j;
-//            }
-//            a[j] = tmp;
-//        }
-//    }
-
     void sort3() {
         int in, out, tmp;
         for (out = 1; out < nElems; out++) {
@@ -68,10 +55,10 @@ class InsertionSort {
     }
 
     void sort4() {
-        int in, out;
+        int in, out, tmp;
 
         for (out = 1; out < nElems; out++) {
-            int tmp = a[out];
+            tmp = a[out];
             in = out;
             while (in > 0 && a[in - 1] >= tmp) {
                 a[in] = a[in - 1];
