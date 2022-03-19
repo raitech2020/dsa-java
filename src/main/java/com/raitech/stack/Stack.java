@@ -7,7 +7,7 @@ public class Stack<T> {
     private ArrayList<T> stackArray;
     private int top;
 
-    Stack(int size) {
+    public Stack(int size) {
         maxSize = size;
         stackArray = new ArrayList<T>(maxSize);
         top = -1;
