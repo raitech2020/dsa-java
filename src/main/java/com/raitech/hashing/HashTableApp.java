@@ -1,9 +1,9 @@
 package com.raitech.hashing;
 
-class HashtableApp {
+class HashTableApp {
     public static void main(String[] args) {
         int size = 100;
-        var ht = new Hashtable(size);
+        var ht = new HashTable(size);
         DataItem item;
         int key;
         for (int i = 0; i < 10; i++) {
@@ -17,19 +17,25 @@ class HashtableApp {
         ht.insert(new DataItem(35));
         ht.insert(new DataItem(55));
         ht.insert(new DataItem(15));
+        ht.insert(new DataItem(1));
+        ht.insert(new DataItem(2));
         ht.display();
-        item = ht.find(15);
+        key = 15;
+        item = ht.find(key);
         if (item != null) {
-            System.out.printf("Found item with key %d\n", item.getKey());
+            System.out.printf("Found item with key %d\n", key);
         } else {
-            System.out.printf("Item not found\n");
+            System.out.printf("Item with key %d not found\n", key);
         }
-        item = ht.delete(65);
+        key = 65;
+        item = ht.delete(key);
         if (item != null) {
-            System.out.printf("Deleted item with key %d\n", item.getKey());
+            System.out.printf("Deleted item with key %d\n", key);
         } else {
-            System.out.printf("Item could not deleted since it is not found\n");
+            System.out.printf("Item with key %d could not deleted since it is not found\n", key);
         }
+        ht.delete(1);
+        ht.delete(2);
         ht.display();
     }
 }
