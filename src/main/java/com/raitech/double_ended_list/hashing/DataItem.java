@@ -1,4 +1,4 @@
-package com.raitech.hashing;
+package com.raitech.double_ended_list.hashing;
 
 class DataItem {
     int data;

@@ -2,6 +2,17 @@ package com.raitech.util;
 
 class Math {
     public static void main(String[] args) {
+        test2();
+    }
+
+    static void test2() {
+        var str = "cats";
+        var arrSize = 53;
+        var hashVal = hashFunc1(str, arrSize);
+        System.out.printf("hashVal = %d\n", hashVal);
+    }
+
+    static void test1() {
         var n = 17;
         var p = isPrime(n);
         System.out.printf("is %d prime? %b", n, p);
@@ -39,5 +50,20 @@ class Math {
                 return i;
             }
         }
+    }
+
+    static int hashFunc1(String key, int arrSize) {
+        int hashVal = 0;
+        int pow27 = 1; // 1, 27, 27*27, 27*27*27, 27*27*27*27
+        char ch; // ascii char value
+        int letter; // alphabet value
+
+        for (int i = key.length() - 1; i >= 0; i--) {
+            ch = key.charAt(i);
+            letter = ch - 96;
+            hashVal += pow27 * letter;
+            pow27 *= 27;
+        }
+        return hashVal % arrSize;
     }
 }

@@ -1,11 +1,11 @@
-package com.raitech.hashing;
+package com.raitech.double_ended_list.hashing;
 
-class DoubleHashTable {
+class HashTable {
     DataItem[] arr;
     int arrSize;
     DataItem nonItem;
 
-    DoubleHashTable(int size) {
+    HashTable(int size) {
         arrSize = size;
         arr = new DataItem[arrSize];
         nonItem = new DataItem(-1);
@@ -16,60 +16,52 @@ class DoubleHashTable {
             if (arr[i] != null) {
                 System.out.printf("%d ", arr[i].getKey());
             } else {
-                System.out.printf("** ");
+                System.out.printf("* ");
             }
         }
         System.out.println();
     }
 
-    int hashFunc1(int key) {
+    int hashFunc(int key) {
         return key % arrSize;
-    }
-
-    int hashFunc2(int key) {
-        return 5 - key % 5;
     }
 
     void insert(DataItem item) {
         int key = item.getKey();
-        int hashVal = hashFunc1(key);
-        int stepSize = hashFunc2(key);
-        // Loop while "not an empty cell" and "not a deleted cell"
+        int hashVal = hashFunc(key);
+        // find an empty cell or a deleted cell
         while (arr[hashVal] != null && arr[hashVal].getKey() != -1) {
-            hashVal += stepSize;
-            hashVal %= arrSize; // if hashVal overflowed
+            ++hashVal;
+            // hash the hashVal in case it overflowed due to increments
+            hashVal %= arrSize; // wraparound
         }
         arr[hashVal] = item;
     }
 
     DataItem find(int key) {
-        int hashVal = hashFunc1(key);
-        int hashStep = hashFunc2(key);
-        System.out.printf("hashVal: %d, hashStep: %d\n", hashVal, hashStep);
+        var hashVal = hashFunc(key); // index where key could be
         while (arr[hashVal] != null) {
             if (arr[hashVal].getKey() == key) {
-                System.out.println();
                 return arr[hashVal];
             }
-            hashVal += hashStep;
+            ++hashVal;
             hashVal %= arrSize;
-            System.out.printf("%d ", hashVal);
         }
         return null;
     }
 
     DataItem delete(int key) {
-        int hashVal = hashFunc1(key);
-        int hashStep = hashFunc2(key);
-        while (arr[hashVal] != null) {
+        var hashVal = hashFunc(key);
+        while (arr[hashVal] != null) { // not an empty cell
             if (arr[hashVal].getKey() == key) {
                 var temp = arr[hashVal];
                 arr[hashVal] = nonItem;
                 return temp;
             }
-            hashVal += hashStep;
-            hashVal %= arrSize;
+            ++hashVal;
+            hashVal %= arrSize; // hash it, if it overflows due to increments
         }
         return null;
     }
+
 }
